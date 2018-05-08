@@ -415,10 +415,10 @@
                                 </div>
                             </div>
                         </apex:outputPanel>
-                        <apex:outputPanel rendered="false">
+                        <!--<apex:outputPanel rendered="false">
                             <apex:outputField value="promotion.Source_Environment__c"/>
                             <apex:outputField value="promotion.Destination_Environment__c"/>
-                        </apex:outputPanel>
+                        </apex:outputPanel>-->
 
                         <apex:outputPanel id="pnlDetail" layout="block" styleClass="copado-lightning-container">
                             <apex:outputPanel rendered="{!$User.UIThemeDisplayed == 'Theme4d'}" layout="none">
@@ -717,7 +717,7 @@
                                                         <td><center><a href="/{!u.userStory.Id}"><img src="/img/icon/custom51_100/books24.png"/></a></center></td>
                                                         <apex:repeat value="{!$ObjectType.copado__User_Story__c.FieldSets.copado__PromotionRelatedList}" var="prl">
                                                             <td>
-                                                                <apex:outputField value="{!u.userStory[prl]}"/>
+                                                                <apex:outputText value="{!u.userStory[prl]}"/>
                                                             </td>
                                                         </apex:repeat>
                                                     </tr>
@@ -784,7 +784,7 @@
                                                         <apex:repeat value="{!$ObjectType.copado__User_Story__c.FieldSets.copado__PromotionRelatedList}" var="prl">
                                                             <td>
 
-                                                                <apex:outputField value="{!u.promotedUS.User_Story__r[prl]}"/>
+                                                                <apex:outputText value="{!u.promotedUS.User_Story__r[prl]}"/>
                                                             </td>
                                                         </apex:repeat>
                                                     </tr>
@@ -819,7 +819,7 @@
                                         </apex:column>
                                         <apex:column id="col3" value="{!st.testGroup.copado__Type__c}" width="30"/>
                                         <apex:column id="col2" value="{!st.location}" width="30" headerValue="Location"/>
-                                        <apex:column id="col4" value="{!st.testGroup.copado__Environment__c}" width="30"/>
+                                        <apex:column id="col4" value="{!st.testGroup.Environment__c}" width="30"/>
                                         <apex:column id="col5" value="{!st.testGroup.copado__Status_Date__c}" width="30"/>
                                         <apex:column id="col6" value="{!st.testGroup.copado__Status__c}" width="40"/>
                                         <apex:column id="col7" value="{!st.testGroup.copado__Status_Icon__c}" width="10"/>
@@ -840,12 +840,12 @@
                                     <apex:repeat value="{!seleniumTestGroups}" var="st">
                                         <tr>
                                             <td><apex:outputLink value="{!URLFOR($Action.copado__Selenium_Test_Group__c.View, st.testGroup.Id)}">{!st.testGroup.Name}</apex:outputLink></td>
-                                            <td><apex:outputField value="{!st.testGroup.copado__Type__c}" /></td>
+                                            <td><apex:outputText value="{!st.testGroup.copado__Type__c}" /></td>
                                             <td><apex:outputText value="{!st.location}" /></td>
-                                            <td><apex:outputField value="{!st.testGroup.copado__Environment__c}" /></td>
-                                            <td><apex:outputField value="{!st.testGroup.copado__Status_Date__c}" /></td>
-                                            <td><apex:outputField value="{!st.testGroup.copado__Status__c}" /></td>
-                                            <td><apex:outputField value="{!st.testGroup.copado__Status_Icon__c}" /></td>
+                                            <td><apex:outputLink value="{!URLFOR($Action.copado__Environment__c.View, st.testGroup.copado__Environment__c)}">{!st.testGroup.Environment__r.Name}</apex:outputLink></td>
+                                            <td><apex:outputText value="{!st.testGroup.copado__Status_Date__c}" /></td>
+                                            <td><apex:outputText value="{!st.testGroup.copado__Status__c}" /></td>
+                                            <td><apex:outputText escape="false" value="{!st.testGroup.copado__Status_Icon__c}" /></td>
                                         </tr>
                                     </apex:repeat>
                                     </tbody>
@@ -860,29 +860,29 @@
                                 <apex:column id="col1" width="60" headerValue="Metadata" style="border-bottom: 1px solid #dddbda !important;">
                                     <apex:outputLink value="/{!metadata.Id}">{!metadata.copado__Metadata_API_Name__c}</apex:outputLink>
                                 </apex:column>  
-                                <apex:column id="col2" value="{!metadata.copado__User_Story__c}" width="30"/>  
-                                <apex:column id="col3" value="{!metadata.Status__c}" width="30"/>  
+                                <apex:column id="col2" value="{!metadata.User_Story__c}" width="30"/>  
+                                <apex:column id="col3" value="{!metadata.copado__Status__c}" width="30"/>  
                                 <apex:column id="col4" value="{!metadata.copado__Status_Icon__c}" width="10"/> 
                                 <apex:column id="col5" value="{!metadata.LastModifiedDate}" width="30"/>  
                             </apex:pageBlockTable>-->
                             <table id="userStoryMetadatasTable" style="overflow:scroll">
                                 <thead>
                                 <tr>
-                                    <th>{!$ObjectType.copado__User_Story_Metadata__c.fields.copado__Metadata_API_Name__c.Label}</th>
-                                    <th>{!$ObjectType.copado__User_Story_Metadata__c.fields.copado__User_Story__c.Label}</th>
-                                    <th>{!$ObjectType.copado__User_Story_Metadata__c.fields.copado__Status__c.Label}</th>
-                                    <th>{!$ObjectType.copado__User_Story_Metadata__c.fields.copado__Status_Icon__c.Label}</th>
-                                    <th>{!$ObjectType.copado__User_Story_Metadata__c.fields.LastModifiedDate.Label}</th>
+                                    <th>{!$ObjectType.User_Story_Metadata__c.fields.Metadata_API_Name__c.Label}</th>
+                                    <th>{!$ObjectType.User_Story_Metadata__c.fields.User_Story__c.Label}</th>
+                                    <th>{!$ObjectType.User_Story_Metadata__c.fields.Status__c.Label}</th>
+                                    <th>{!$ObjectType.User_Story_Metadata__c.fields.Status_Icon__c.Label}</th>
+                                    <!--<th>{!$ObjectType.User_Story_Metadata__c.fields.LastModifiedDate.Label}</th>-->
                                 </tr>
                                 </thead>
                                 <tbody style="overflow:scroll">
                                     <apex:repeat value="{!userStoryMetadatas}" var="metadata">
                                         <tr>
                                             <td><apex:outputLink value="/{!metadata.Id}">{!metadata.copado__Metadata_API_Name__c}</apex:outputLink></td>
-                                            <td><apex:outputField value="{!metadata.copado__User_Story__c}" /></td>
-                                            <td>{!metadata.copado__Status__c}</td>
-                                            <td><apex:outputField value="{!metadata.copado__Status_Icon__c}" /></td>
-                                            <td><apex:outputField value="{!metadata.LastModifiedDate}" /></td>
+                                            <td><apex:outputLink value="/{!metadata.copado__User_Story__c}">{!metadata.User_Story__r.Name}</apex:outputLink></td>
+                                            <td><apex:outputText value="{!metadata.copado__Status__c}" /></td>
+                                            <td><apex:outputText escape="false" value="{!metadata.copado__Status_Icon__c}" /></td>
+                                            <!--<td><apex:outputField value="{!metadata.LastModifiedDate}" /></td>-->
                                         </tr>
                                     </apex:repeat>
                                 </tbody>
