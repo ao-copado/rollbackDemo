@@ -2,8 +2,6 @@
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <defaultLandingTab>standard-home</defaultLandingTab>
     <formFactors>Large</formFactors>
-    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
-    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
     <label>Copado Change Management</label>
     <logo>copado__Copado/copado__Copado_Logo.png</logo>
     <tabs>copado__Project__c</tabs>
